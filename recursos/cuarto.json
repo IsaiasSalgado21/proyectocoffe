@@ -1,0 +1,25 @@
+{ "frames": {
+   "cuarto.ase": {
+    "frame": { "x": 0, "y": 0, "w": 250, "h": 250 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 250, "h": 250 },
+    "sourceSize": { "w": 250, "h": 250 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://github.com/LibreSprite/LibreSprite/",
+  "version": "1.1-dev",
+  "image": "C:\\Users\\zombi\\Desktop\\dibujo\\cuarto.png",
+  "format": "RGBA8888",
+  "size": { "w": 250, "h": 250 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "paredes", "opacity": 255, "blendMode": "normal" },
+   { "name": "piso", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}

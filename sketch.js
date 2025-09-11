@@ -1,4 +1,4 @@
-let pisoImg;
+let cuartoImg;
 let spriteImg;
 let framesData;
 let currentFrame = 0;
@@ -11,7 +11,7 @@ let speed = 2;
 
 function preload() {
 
-  pisoImg = loadImage("recursos/pisoBN.png")
+  cuartoImg = loadImage("recursos/cuarto.png")
   spriteImg = loadImage("recursos/gatito.png");
   framesData = loadJSON("recursos/gatito.json");
 }
@@ -28,7 +28,7 @@ function draw() {
   background(220);
 
   //aqui estamos dibujando el piso
-  image(pisoImg, 0, 0, 162*4, 88*4);
+  image(cuartoImg, 0, 0, 250*2.5, 250*2.5);
 
   let f = framesData[currentFrame];
   let frame = f.frame;
@@ -56,5 +56,11 @@ function draw() {
   if (millis() - lastChange > f.duration) {
     currentFrame = (currentFrame + 1) % framesData.length;
     lastChange = millis();
+  }
+}
+
+function keyPressed(){
+  if(key === "k"|| key === "k" ){
+    console.log("se presiono la tecla k");
   }
 }
