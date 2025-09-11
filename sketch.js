@@ -1,5 +1,6 @@
 let cuartoImg;
 let spriteImg;
+let cafeteraImg;
 let framesData;
 let currentFrame = 0;
 let lastChange = 0;
@@ -13,7 +14,9 @@ function preload() {
 
   cuartoImg = loadImage("recursos/cuarto.png")
   spriteImg = loadImage("recursos/gatito.png");
+  cafeteraImg = loadImage("recursos/cafetera.png")
   framesData = loadJSON("recursos/gatito.json");
+
 }
 
 function setup() {
@@ -29,6 +32,8 @@ function draw() {
 
   //aqui estamos dibujando el piso
   image(cuartoImg, 0, 0, 250*2.5, 250*2.5);
+
+  image(cafeteraImg, 230, 235, 64*2, 64*2);
 
   let f = framesData[currentFrame];
   let frame = f.frame;
