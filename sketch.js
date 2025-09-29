@@ -121,6 +121,8 @@ let gatitoRadio = 16; // Radio del gatito para colisiones
 let direccion = "quieto"; 
 function draw() {
   background(220);
+  // Dibuja la cuadrícula isométrica como guía
+  drawIsometricGrid(16, 16, 124, 62, 600, 100); // Puedes ajustar el offset para centrar la cuadrícula
   image(cuartoImg, 0, 0, 250*2.5, 250*2.5);
   image(cafeteraImg, 230, 235, 64*2, 64*2);
 
@@ -254,4 +256,25 @@ function circleCircleCollide(x1, y1, r1, x2, y2, r2) {
   let dy = y1 - y2;
   let distancia = sqrt(dx * dx + dy * dy);
   return distancia < (r1 + r2);
+}
+
+// Función para dibujar la cuadrícula isométrica
+function drawIsometricGrid(cols, rows, tileWidth, tileHeight, offsetX, offsetY) {
+  fill(200, 255, 200, 50);
+  stroke(100, 255, 100, 150); // Verde claro con transparencia
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      // Coordenadas isométricas
+      let isoX = (x - y) * tileWidth / 2 + offsetX;
+      let isoY = (x + y) * tileHeight / 2 + offsetY;
+
+      // Dibuja el rombo (loseta)
+      beginShape();
+      vertex(isoX, isoY);
+      vertex(isoX + tileWidth / 2, isoY + tileHeight / 2);
+      vertex(isoX, isoY + tileHeight);
+      vertex(isoX - tileWidth / 2, isoY + tileHeight / 2);
+      endShape(CLOSE);
+    }
+  }
 }
