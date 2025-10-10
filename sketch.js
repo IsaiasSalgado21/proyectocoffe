@@ -12,42 +12,6 @@ let speed = 2;
 let showHitbox = false;
 
 
-// Clase para objetos rectangulares
-class ObjetoRect {
-  constructor(x, y, w, h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  }
-  dibujar() {
-    rect(this.x, this.y, this.w, this.h);
-  }
-}
-
-// Clase para objetos circulares
-class ObjetoCirc {
-  constructor(x, y, r) {
-    this.x = x;
-    this.y = y;
-    this.r = r;
-  }
-  dibujar() {
-    ellipse(this.x, this.y, this.r * 2);
-  }
-}
-
-// Arreglos de objetos
-let objetosRect = [
-  new ObjetoRect(250, 230, 50, 50)
-];
-
-let objetosCirc = [
-  new ObjetoCirc(500, 300, 40),
-  new ObjetoCirc(700, 400, 50)
-];
-
-
 function preload() {
 
   cuartoImg = loadImage("recursos/cuarto.png")
@@ -114,6 +78,15 @@ function setup() {
     ],
     quieto: [frameNameToIndex["gatito 2.ase"]]
   };
+
+  gatito = new Gatito(
+    120, 120, // posición inicial
+    2,        // velocidad
+    16,       // radio para colisiones
+    framesData,
+    spriteImg,
+    frameSets
+  );
 }
 
 let gatitoRadio = 16; // Radio del gatito para colisiones
@@ -121,122 +94,32 @@ let gatitoRadio = 16; // Radio del gatito para colisiones
 let direccion = "quieto"; 
 function draw() {
   background(220);
-  // Dibuja la cuadrícula isométrica como guía
-  drawIsometricGrid(16, 16, 124, 62, 600, 100); // Puedes ajustar el offset para centrar la cuadrícula
+  drawIsometricGrid(16, 16, 124, 62, 600, 100);
   image(cuartoImg, 0, 0, 250*2.5, 250*2.5);
   image(cafeteraImg, 230, 235, 64*2, 64*2);
 
-  let nextX = gatitoX;
-  let nextY = gatitoY;
-
-  // Detectar dirección y movimiento
-  let movArriba = keyIsDown(87); // W
-  let movAbajo = keyIsDown(83);  // S
-  let movIzq = keyIsDown(65);    // A
-  let movDer = keyIsDown(68);    // D
-
-  // Determinar dirección
-  if (movAbajo && movDer) direccion = "abajoDerecha";
-  else if (movAbajo && movIzq) direccion = "abajoIzquierda";
-  else if (movArriba && movDer) direccion = "arribaDerecha";
-  else if (movArriba && movIzq) direccion = "arribaIzquierda"; 
-  else if (movAbajo) direccion = "abajo";
-  else if (movArriba) direccion = "arriba";
-  else if (movDer) direccion = "derecha";
-  else if (movIzq) direccion = "izquierda";
-  else direccion = "quieto";
-
-  // Movimiento
-  if (movArriba) nextY -= speed;
-  if (movAbajo) nextY += speed;
-  if (movIzq) nextX -= speed;
-  if (movDer) nextX += speed;
-
-  let hitboxX = nextX + 16;
-  let hitboxY = nextY + 32;
-
-  // Colisión con rectángulos
-  let colisionRect = objetosRect.some(obj =>
-    circleRectCollide(
-      hitboxX,
-      hitboxY,
-      gatitoRadio,
-      obj.x, obj.y, obj.w, obj.h
-    )
-  );
-
-  // Colisión con círculos
-  let colisionCirc = objetosCirc.some(obj =>
-    circleCircleCollide(
-      hitboxX,
-      hitboxY,
-      gatitoRadio,
-      obj.x,
-      obj.y,
-      obj.r
-    )
-  );
-
-  if (!colisionRect && !colisionCirc) {
-    gatitoX = nextX;
-    gatitoY = nextY;
-  }
+  // Actualiza y dibuja el gatito
+  gatito.actualizar(objetosRect, objetosCirc);
+  gatito.dibujar();
 
   // Dibujar objetos
   objetosRect.forEach(obj => obj.dibujar());
   objetosCirc.forEach(obj => obj.dibujar());
 
-  if (showHitbox) {
-    noFill();
-    stroke(0, 255, 0);
-    objetosRect.forEach(obj => rect(obj.x, obj.y, obj.w, obj.h));
-    objetosCirc.forEach(obj => ellipse(obj.x, obj.y, obj.r * 2));
-    ellipse(gatitoX + 16, gatitoY + 32, gatitoRadio * 2);
-    stroke(0);
-  }
   // --- DETECCIÓN CERCA DE LA CAFETERA ---
-  // Coordenadas y radio de interacción de la cafetera
-  let cafeteraCentroX = 230 + 64; // centro X de la cafetera
-  let cafeteraCentroY = 235 + 64; // centro Y de la cafetera
-  let radioInteraccion = 48; // puedes ajustar este valor
+  let cafeteraCentroX = 230 + 64;
+  let cafeteraCentroY = 235 + 64;
+  let radioInteraccion = 48;
 
-  let distanciaCafetera = dist(gatitoX + 16, gatitoY + 32, cafeteraCentroX, cafeteraCentroY);
+  let distanciaCafetera = dist(gatito.x + 16, gatito.y + 32, cafeteraCentroX, cafeteraCentroY);
   if (distanciaCafetera < radioInteraccion) {
     console.log("estas cerca de la cafetera");
   }
-
-  // Animación según dirección
-  let frames = frameSets[direccion];
-  let frameIndex = 0;
-  if (direccion !== "quieto") {
-    // Avanza el frame solo si está en movimiento
-    if (millis() - lastChange > framesData[frames[currentFrame % frames.length]].duration) {
-      currentFrame = (currentFrame + 1) % frames.length;
-      lastChange = millis();
-    }
-    frameIndex = frames[currentFrame % frames.length];
-  } else {
-    currentFrame = 0; // Siempre el primer frame de quieto
-    frameIndex = frames[0];
-  }
-
-  let f = framesData[frameIndex];
-  let frame = f.frame;
-
-  image(
-    spriteImg,
-    gatitoX, gatitoY, frame.w * 2, frame.h * 2,
-    frame.x, frame.y, frame.w, frame.h
-  );
 }
 
 function keyPressed(){
-  if(key === "k"|| key === "k" ){
-    console.log("se presiono la tecla k");
-  }
   if (key === "h" || key === "H") {
-    showHitbox = !showHitbox;
-    console.log("Mostrar hitbox:", showHitbox);
+    gatito.toggleHitbox();
   }
 }
 
@@ -260,8 +143,8 @@ function circleCircleCollide(x1, y1, r1, x2, y2, r2) {
 
 // Función para dibujar la cuadrícula isométrica
 function drawIsometricGrid(cols, rows, tileWidth, tileHeight, offsetX, offsetY) {
-  fill(200, 255, 200, 50);
-  stroke(100, 255, 100, 150); // Verde claro con transparencia
+  fill('#2d5804');
+  stroke('#124900ff'); // Verde claro con transparencia
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       // Coordenadas isométricas
@@ -278,3 +161,15 @@ function drawIsometricGrid(cols, rows, tileWidth, tileHeight, offsetX, offsetY) 
     }
   }
 }
+
+let gatito; // Instancia de la clase Gatito
+
+// Esto sí está bien en sketch.js
+let objetosRect = [
+  new ObjetoRect(250, 230, 50, 50)
+];
+
+let objetosCirc = [
+  new ObjetoCirc(500, 300, 40),
+  new ObjetoCirc(700, 400, 50)
+];
