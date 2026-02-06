@@ -1,1 +1,1 @@
-{"completed":[{"name":"bloque colision"},{"name":"Sprite MOVIMIENTO Gatito"},{"name":"Crear el repo"}],"inprogress":[{"name":"tecla de accion"},{"name":"bloque de accion"},{"name":"Sprite paredes"}],"testing":[],"todo":[]}
+{"completed":[{"name":"bloque colision"},{"name":"Sprite MOVIMIENTO Gatito"},{"name":"Crear el repo"},{"name":"cafeteria sprite"}],"inprogress":[{"name":"accion de preparar cafe"},{"name":"tomar y servir cafe"}],"testing":[{"name":"Sprite paredes"},{"name":"tecla de accion"},{"name":"bloque de accion"}],"todo":[{"name":"arquitectura del mapa, spots"}]}

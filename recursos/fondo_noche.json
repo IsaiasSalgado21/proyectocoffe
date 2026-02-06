@@ -1,0 +1,43 @@
+{ "frames": {
+   "fondo_noche 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 1024, "h": 512 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1024, "h": 512 },
+    "sourceSize": { "w": 1024, "h": 512 },
+    "duration": 100
+   },
+   "fondo_noche 1.ase": {
+    "frame": { "x": 1024, "y": 0, "w": 1024, "h": 512 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1024, "h": 512 },
+    "sourceSize": { "w": 1024, "h": 512 },
+    "duration": 100
+   },
+   "fondo_noche 2.ase": {
+    "frame": { "x": 2048, "y": 0, "w": 1024, "h": 512 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1024, "h": 512 },
+    "sourceSize": { "w": 1024, "h": 512 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://github.com/LibreSprite/LibreSprite/",
+  "version": "1.1-dev",
+  "image": "C:\\Users\\zombi\\Desktop\\uni\\Proyecto coffe\\recursos\\fondo_noche.png",
+  "format": "RGBA8888",
+  "size": { "w": 3072, "h": 512 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "cielo", "opacity": 255, "blendMode": "normal" },
+   { "name": "estrellas", "opacity": 255, "blendMode": "normal" },
+   { "name": "Mar", "opacity": 255, "blendMode": "normal" },
+   { "name": "espuma", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}

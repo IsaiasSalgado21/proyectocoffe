@@ -1,0 +1,49 @@
+{ "frames": {
+   "murdans 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 124, "h": 124 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 124, "h": 124 },
+    "sourceSize": { "w": 124, "h": 124 },
+    "duration": 100
+   },
+   "murdans 1.ase": {
+    "frame": { "x": 124, "y": 0, "w": 124, "h": 124 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 124, "h": 124 },
+    "sourceSize": { "w": 124, "h": 124 },
+    "duration": 100
+   },
+   "murdans 2.ase": {
+    "frame": { "x": 248, "y": 0, "w": 124, "h": 124 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 124, "h": 124 },
+    "sourceSize": { "w": 124, "h": 124 },
+    "duration": 100
+   },
+   "murdans 3.ase": {
+    "frame": { "x": 372, "y": 0, "w": 124, "h": 124 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 124, "h": 124 },
+    "sourceSize": { "w": 124, "h": 124 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://github.com/LibreSprite/LibreSprite/",
+  "version": "1.1-dev",
+  "image": "C:\\Users\\zombi\\Desktop\\uni\\Proyecto coffe\\recursos\\murdans.png",
+  "format": "RGBA8888",
+  "size": { "w": 496, "h": 124 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}
